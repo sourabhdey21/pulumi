@@ -1,0 +1,14 @@
+name: python
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: pulumi begining
+cloud: openstack
+config:
+  openstack:authUrl: "http://******:5000"
+  openstack:userName: "admin"
+  openstack:password: "********"
+  openstack:tenantName: "admin"
+  openstack:domainName: "Default"
+
