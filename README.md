@@ -7,7 +7,9 @@ Getting started
 
 
 Command:
-**  pulumi new ***
+  pulumi new 
+
   pulumi preview 
-  pulumi up --yes 
-  **
+  
+  pulumi up --yes
+
