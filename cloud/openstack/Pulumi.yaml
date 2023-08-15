@@ -1,0 +1,13 @@
+name: pulum
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A minimal OpenStack Python Pulumi program
+cloud: openstack
+config:
+  openstack:authUrl: "http://192.168.198.206:5000"
+  openstack:userName: "admin"
+  openstack:password: "KbwyH89R3GPon2MjrUfrMTI9fZcs8fSVa5SuWs3K"
+  openstack:tenantName: "admin"
+  openstack:domainName: "Default"
