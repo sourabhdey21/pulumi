@@ -1,0 +1,12 @@
+name: demo
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A minimal OpenStack Python Pulumi program
+config:
+  openstack:authUrl: "http://192.168.2.21:5000"
+  openstack:domainName: "Default"
+  openstack:password: "7dH59ip8eJsOQFSfM2zIgnLSqHINRYRwJaJI778m"
+  openstack:tenantName: "game_net2"
+  openstack:userName: "admin"
