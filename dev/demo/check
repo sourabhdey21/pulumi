@@ -1,0 +1,256 @@
+import pulumi
+
+import pulumi_openstack as openstack
+
+# Define the OpenStack provider configuration
+provider = openstack.Providaer("openstack",
+
+    user_name="admin",
+
+    password="7dH59ip8eJsOQFSfM2zIgnLSqHINRYRwJaJI778m",
+
+    tenant_name="game_net2",
+
+    auth_url="http://192.168.2.22:5000",
+
+    allow_reauth="true",
+
+)
+
+def create_network(Network_Name: str):
+
+    network = openstack.networking.Network(Network_Name,
+
+    name=Network_Name,
+
+    admin_state_up="true",
+
+    mtu="1450",
+
+    shared="false",
+
+    port_security_enabled="false",
+
+    )
+    return network
+
+def create_subnet(network: openstack.networking.Network, Subnet_Name: str, Cidr: str, Gateway: str):
+
+    subnet = openstack.networking.Subnet(Subnet_Name,
+
+    name=Subnet_Name,
+
+    network_id=network.id,
+
+    cidr=Cidr,
+
+    #allocation_pools=[{"start": "10.0.0.10", "end": "10.0.0.20"}],
+
+    gateway_ip=Gateway,
+
+    )
+    return subnet
+
+def create_router(name: str, flavor: str,image: str, Network: list):
+
+    router = openstack.compute.Instance(name,
+
+        flavor_name=flavor,
+
+        image_name=image,
+
+        #networks=[EX_GF.name],
+
+        networks=Network,
+
+    )
+
+    return router
+
+def create_firewall(name: str, flavor: str,image: str, Network: list):
+
+    firewall = openstack.compute.Instance(name,
+
+        flavor_name=flavor,
+
+        image_name=image,
+
+        #networks=[EX_GF.name],
+
+        networks=Network,
+
+    )
+
+    return firewall
+
+def create_instance(name: str, flavor: str,image: str, Network: list,usr_data: str):
+
+    instance = openstack.compute.Instance(name,
+
+        flavor_name=flavor,
+
+        image_name=image,
+
+        #networks=[EX_GF.name],
+
+        networks=Network,
+        user_data= usr_data,
+
+    )
+    return instance
+
+def create_vyos(name: str, flavor: str,image: str, Network: list):
+
+    instance = openstack.compute.Instance(name,
+            flavor_name=flavor,
+
+            image_name=image,
+
+            networks=Network,
+
+            block_devices=[openstack.compute.InstanceBlockDeviceArgs(
+                source_type="snapshot",
+                uuid="9a600d3a-8013-4fd3-933d-632f440f11e5",
+                destination_type="volume",
+                ),
+            ],
+
+        )
+    return instance
+
+def create_window_snap(name: str, flavor: str,image: str, Network: list,snaphot_uuid: str,):
+
+    instance = openstack.compute.Instance(name,
+            flavor_name=flavor,
+
+            image_name=image,
+
+            networks=Network,
+
+            block_devices=[openstack.compute.InstanceBlockDeviceArgs(
+                source_type="snapshot",
+                uuid=snaphot_uuid,
+                destination_type="volume",
+                ),
+            ],
+
+        )
+    return instance
+
+
+from utils import network_list,subnet_list,gateway_list,main_router_dict,main_win_dict
+
+#Network
+data_list = {'network':network_list,'subnet':subnet_list,'gateway':gateway_list}
+
+for i in range(len(data_list['network'])):
+	
+    network = create_network(data_list['network'][i])
+
+    network_subnet = create_subnet(network,f"{data_list['network'][i]}_subnet",data_list['subnet'][i],data_list['gateway'][i])
+
+
+# #Router
+for index,router in enumerate(main_router_dict):
+    interfaces = []
+    for j in main_router_dict[router]:
+        #print(j[0],j[1]) 
+        interface = openstack.compute.InstanceNetworkArgs(
+                name = j[1],
+                access_network="true",
+                fixed_ip_v4=j[0],
+                )
+        #print(interface.name)
+    
+        interfaces.append(interface)
+    
+    V1 = create_vyos(router,"m1.small","vyos-img",interfaces)
+
+#Window_Snaphot
+for index,win in enumerate(main_win_dict):
+    interfaces = []
+    for j in main_win_dict[win]:
+        #print(j[0],j[1]) 
+        interface = openstack.compute.InstanceNetworkArgs(
+                name = j[1],
+                access_network="true",
+                fixed_ip_v4=j[0],
+                )
+        #print(interface.name)
+    
+        interfaces.append(interface)
+    
+    W1 = create_window_snap(win,"windows-flavor","windowssvr-snap1",interfaces,"9fbe3968-3904-4d83-9612-84abb9162df2")
+
+
+#RAP_Instance
+RAP_Interface = [openstack.compute.InstanceNetworkArgs(
+    name = "external",
+    access_network = "true",
+    fixed_ip_v4 = "203.0.3.190",
+    ),
+    openstack.compute.InstanceNetworkArgs(
+    name = "GAME21_OOB",
+    access_network = "true",
+    fixed_ip_v4 = "172.17.2.13",
+  ),]
+
+user_data = '''#cloud-config
+password: C1sc0123!
+chpasswd: { expire: False }
+ssh_pwauth: True'''
+RAP21 = create_instance("Game21_RAP","gp1.medium","centos8",RAP_Interface,user_data)
+
+#RED1_Instance
+
+RED1_Interface = [
+
+    openstack.compute.InstanceNetworkArgs(
+
+    name = "Game21_RED_01",
+
+    access_network = "true",
+
+    fixed_ip_v4 = "172.20.1.69",
+
+  ),]
+
+ 
+
+user_data = '''#cloud-config
+
+password: C1sc0123!
+
+chpasswd: { expire: False }
+
+ssh_pwauth: True'''
+
+RED1 = create_instance("Game21_RED1","m1.small","centos8",RED1_Interface,user_data)
+
+ 
+
+#RED2_Instance
+
+RED2_Interface = [
+
+    openstack.compute.InstanceNetworkArgs(
+
+    name = "Game21_RED_02",
+
+    access_network = "true",
+
+    fixed_ip_v4 = "172.20.2.69",
+
+  ),]
+
+ 
+
+user_data = '''#cloud-config
+
+password: C1sc0123!
+
+chpasswd: { expire: False }
+
+ssh_pwauth: True'''
+
+RED2 = create_instance("Game21_RED2","m1.small","centos8",RED2_Interface,user_data)
