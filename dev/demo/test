@@ -1,0 +1,26 @@
+[Thursday 11:32 AM] Shivam  Choudhary
+
+OSPF Configuration via Ansible on all routers
+
+ 
+
+delete protocols ospf area 0
+
+delete protocols ospf area 0 network 0.0.0.0/0
+
+ 
+
+set protocols ospf area 1 network 172.19.1.0/24
+
+set protocols ospf area 1 network 172.18.1.0/24
+
+set protocols ospf area 2 network 10.0.0.0/8
+
+set protocols ospf area 3 network 172.20.0.0/16
+
+
+[Thursday 11:32 AM] Shivam  Choudhary
+
+OSPF Configuration via Ansible 172.17.2.11,172.17.2.14,172.17.2.15,172.17.2.16,172.17.2.23
+
+set protocols ospf default-information originate
