@@ -1,0 +1,51 @@
+Ping host command 
+
+--------------------------------------------------------------------
+#!/bin/bash
+
+# Check if the input file exists
+if [ ! -f "vyos_router.txt" ]; then
+    echo "Error: The file 'ip_addresses.txt' does not exist."        
+    exit 1
+fi
+
+# Read IP addresses from the file and ping each one
+while read -r ip; do
+    # Ping the IP address with a count of 1 and a timeout of 1 second
+    ping -c 1 -W 1 "$ip" > /dev/null 2>&1
+
+    # Check the exit status of the ping command
+    if [ $? -eq 0 ]; then
+        echo "Host $ip is available."
+    else
+        echo "Host $ip is unreachable."
+    fi
+done < "vyos_router.txt"
+
+
+
+-------------------------------------------------------------------
+
+vyos_router.txt
+
+172.17.2.10
+172.17.2.11
+172.17.2.30
+172.17.2.31
+172.17.2.32
+172.17.2.14
+172.17.2.15
+172.17.2.16
+172.17.2.17
+172.17.2.18
+172.17.2.19
+172.17.2.20
+172.17.2.21
+172.17.2.22
+172.17.2.23
+172.17.2.24
+172.17.2.25
+172.17.2.26
+172.17.2.27
+172.17.2.28
+172.17.2.29a
