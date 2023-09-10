@@ -1,0 +1,269 @@
+network = '''GAME21_GDGU
+GAME21_RED_01
+GAME21_RED_02
+GAME21_BLUE_01
+GAME21_BLUE_02
+GAME21_OOB
+GAME21_FAKE
+GAME21_ISP_VY01_VY02
+GAME21_ISP_VY01_VY03
+GAME21_ISP_VY01_VY04
+GAME21_ISP_VY02_VY03
+GAME21_ISP_VY02_VY04
+GAME21_ISP_VY03_VY04
+GAME21_GDGU_ISP_VY03
+GAME21_RED01_ISP_VY03
+GAME21_BLUE02_ISP_VY04
+GAME21_BLUE01_ISP_VY04
+GAME21_RED02_ISP_VY02
+GAME21_ISP_VY01_FAKE
+GAME21_BLUE1_DMZ
+GAME21_BLUE1_PUBLIC
+GAME21_BLUE1_CLOUD
+GAME21_BLUE1_OFFICE
+GAME21_BLUE1_DEV
+GAME21_BLUE1_SEC
+GAME21_BLUE1_PF02_VY04
+GAME21_BLUE1_PF02_VY05
+GAME21_BLUE2_DMZ
+GAME21_BLUE2_PUBLIC
+GAME21_BLUE2_CLOUD
+GAME21_BLUE2_OFFICE
+GAME21_BLUE2_DEV
+GAME21_BLUE2_SEC
+GAME21_BLUE2_PF02_VY04
+GAME21_BLUE2_PF02_VY05'''
+
+
+network_list = network.split('\n')
+#print(network_list)
+
+subnet = '''10.3.1.0/24
+172.20.1.0/24
+172.20.2.0/24
+10.1.1.0/24
+10.2.1.0/24
+172.17.2.0/24
+172.17.3.0/24
+172.19.1.40/29
+172.19.1.32/29
+172.19.1.24/29
+172.19.1.16/29
+172.19.1.0/29
+172.19.1.8/29
+172.18.1.24/29
+172.18.1.16/29
+172.18.1.8/29
+172.18.1.0/29
+172.18.1.40/29
+172.18.1.32/29
+10.1.2.0/24
+10.1.3.0/24
+10.1.4.0/24
+10.1.5.0/24
+10.1.6.0/24
+10.1.7.0/24
+172.17.5.0/29
+172.17.5.8/29
+10.2.2.0/24
+10.2.3.0/24
+10.2.4.0/24
+10.2.5.0/24
+10.2.6.0/24
+10.2.7.0/24
+172.17.6.0/29
+172.17.6.8/29'''
+
+subnet_list = subnet.split('\n')
+print()
+#print(subnet_list)
+
+gateway = '''10.3.1.1
+172.20.1.1
+172.20.2.1
+10.1.1.1
+10.2.1.2
+172.17.2.1
+172.17.3.1
+172.19.1.41
+172.19.1.33
+172.19.1.25
+172.19.1.17
+172.19.1.1
+172.19.1.9
+172.18.1.25
+172.18.1.17
+172.18.1.9
+172.18.1.1
+172.18.1.41
+172.18.1.33
+10.1.2.1
+10.1.3.1
+10.1.4.1
+10.1.5.1
+10.1.6.1
+10.1.7.1
+172.17.5.1
+172.17.5.9
+10.2.2.1
+10.2.3.1
+10.2.4.1
+10.2.5.1
+10.2.6.1
+10.2.7.1
+172.17.6.1
+172.17.6.9'''
+
+gateway_list = gateway.split('\n')
+
+print()
+#print(gateway_list)
+
+
+router = '''GAME21_ISP_VY01
+GAME21_ISP_VY02
+GAME21_ISP_VY03
+GAME21_ISP_VY04
+GAME21_RED1_PF_01
+GAME21_RED2_PF_01
+GAME21_BLUE1_PF_01
+GAME21_BLUE1_PF_02
+GAME21_BLUE1_VY_01
+GAME21_BLUE1_VY_02
+GAME21_BLUE1_VY_03
+GAME21_BLUE1_VY_04
+GAME21_BLUE1_VY_05
+GAME21_BLUE2_PF_01
+GAME21_BLUE2_PF_02
+GAME21_BLUE2_VY_01
+GAME21_BLUE2_VY_02
+GAME21_BLUE2_VY_03
+GAME21_BLUE2_VY_04
+GAME21_BLUE2_VY_05
+GAME21_GDGU_PF_01
+GAME21_FAKE_PF_01'''
+
+router_list = router.split('\n')
+#print(1111,router_list)
+
+ip = '''172.17.2.11-GAME21_OOB,203.0.3.89-external,172.19.1.25-GAME21_ISP_VY01_VY04,172.19.1.33-GAME21_ISP_VY01_VY03,172.19.1.41-GAME21_ISP_VY01_VY02,172.18.1.35-GAME21_ISP_VY01_FAKE
+172.17.2.30-Game21_OOB,172.19.1.43-GAME21_ISP_VY01_VY02,172.19.1.17-GAME21_ISP_VY02_VY03,172.19.1.1-GAME21_ISP_VY02_VY04,172.18.1.41-GAME21_RED02_ISP_VY02
+172.17.2.31-Game21_OOB,172.19.1.35-GAME21_ISP_VY01_VY03,172.19.1.19-GAME21_ISP_VY02_VY03,172.19.1.9-GAME21_ISP_VY03_VY04,172.18.1.17-GAME21_RED01_ISP_VY03,172.18.1.25-GAME21_GDGU_ISP_VY03
+172.17.2.32-Game21_OOB,172.19.1.27-GAME21_ISP_VY01_VY04,172.19.1.3-GAME21_ISP_VY02_VY04,172.19.1.11-GAME21_ISP_VY03_VY04,172.18.1.1-GAME21_BLUE01_ISP_VY04,172.18.1.9-GAME21_BLUE02_ISP_VY04
+172.17.2.14-GAME21_OOB,172.18.1.19-GAME21_RED01_ISP_VY03,172.20.1.1-GAME21_RED_01
+172.17.2.15-GAME21_OOB,172.18.1.43-GAME21_RED02_ISP_VY02,172.20.2.1-GAME21_RED_02
+172.17.2.16-GAME21_OOB,172.18.1.3-GAME21_BLUE01_ISP_VY04,10.1.1.1-GAME21_BLUE_01
+172.17.2.17-GAME21_OOB,10.1.1.1-GAME21_BLUE_01,172.17.5.1-GAME21_BLUE1_PF02_VY04,172.17.5.9-GAME21_BLUE1_PF02_VY05
+172.17.2.18-GAME21_OOB,10.1.2.1-GAME21_BLUE1_DMZ,10.1.1.11-GAME21_BLUE_01
+172.17.2.19-GAME21_OOB,10.1.3.1-GAME21_BLUE1_PUBLIC,10.1.1.12-GAME21_BLUE_01
+172.17.2.20-GAME21_OOB,10.1.4.1-GAME21_BLUE1_CLOUD,10.1.1.13-GAME21_BLUE_01
+172.17.2.21-GAME21_OOB,10.1.5.1-GAME21_BLUE1_OFFICE,10.1.6.1-GAME21_BLUE1_DEV,172.17.5.3-GAME21_BLUE1_PF02_VY04
+172.17.2.22-GAME21_OOB,10.1.7.1-GAME21_BLUE1_SEC,172.17.5.11-GAME21_BLUE1_PF02_VY05
+172.17.2.23-GAME21_OOB,172.18.1.11-GAME21_BLUE02_ISP_VY04,10.2.1.2-GAME21_BLUE_02
+172.17.2.24-GAME21_OOB,10.2.1.10-GAME21_BLUE_02,172.17.6.1-GAME21_BLUE2_PF02_VY04,172.17.6.9-GAME21_BLUE2_PF02_VY05
+172.17.2.25-GAME21_OOB,10.2.2.1-GAME21_BLUE2_DMZ,10.2.1.11-GAME21_BLUE_02
+172.17.2.26-GAME21_OOB,10.2.3.1-GAME21_BLUE2_PUBLIC,10.2.1.12-GAME21_BLUE_02
+172.17.2.27-GAME21_OOB10.2.4.1-GAME21_BLUE2_CLOUD,10.2.1.13-GAME21_BLUE_02
+172.17.2.28-GAME21_OOB,10.2.5.1-GAME21_BLUE2_OFFICE,10.2.6.1-GAME21_BLUE2_DEV,172.17.6.3-Game21_BLUE2_PF02_VY04
+172.17.2.29-GAME21_OOB,10.2.7.1-GAME21_BLUE2_SEC,172.17.6.11-GAME21_BLUE2_PF02_VY05
+172.17.2.10-GAME21_OOB,203.0.3.189-external,10.3.1.1-GAME21_GDGU,172.18.1.27-GAME21_GDGU_ISP_VY03
+172.17.2.33-Game21_OOB,172.17.3.1-GAME21_FAKE,172.18.1.33-GAME21_ISP_VY01_FAKE'''
+
+ip2 = ip.split('\n')
+#print('\nip2: ',ip2)
+
+# final_ip = []
+# for data in ip2:
+    # final_ip.append(data.split())
+ip_list = [j.split(',') for j in ip2]
+
+#print(222,ip_list)
+
+main_router_dict = {}
+
+for index,router in enumerate(router_list):
+    try:
+        ab1 = []
+        ip_data = ip_list[index]
+        #print('ip data: ',ip_data,'i: ',index)
+        for j in ip_data:
+            ab1.append(j.split('-'))
+        main_router_dict[router] = ab1
+    except:
+        break
+
+main_win_dict = {}
+
+window_server = '''win_blue1_dmz_01
+win_blue1_office_01
+win_blue1_sec_01
+win_blue2_dmz_01
+win_blue2_office_01
+win_blue2_sec_01'''
+
+window_server = window_server.split('\n')
+
+window_server_ip = '''10.1.2.100-Game21_BLUE1_DMZ
+10.1.5.100-Game21_BLUE1_OFFICE
+10.1.7.100-Game21_BLUE1_SEC
+10.2.2.100-Game21_BLUE2_DMZ
+10.2.5.100-Game21_BLUE2_OFFICE
+10.2.7.100-Game21_BLUE2_SEC'''
+
+window_server_ip2 = window_server_ip.split('\n')
+window_server_ip_list = [j.split(',') for j in window_server_ip2]
+
+for index,win in enumerate(window_server):
+    try:
+        ab1 = []
+        ip_data = window_server_ip_list[index]
+        #print('ip data: ',ip_data,'i: ',index)
+        for j in ip_data:
+            ab1.append(j.split('-'))
+        main_win_dict[win] = ab1
+    except:
+        break
+
+#print('main router dict: ',main_router_dict['GAME21_ISP_VY01'][0][0])
+'''
+for index,router in enumerate(main_router_dict):
+    interfaces = []
+    for j in main_router_dict[router]:
+        #print(j[0],j[1]) 
+        interface = openstack.compute.InstanceNetworkArgs(
+                name = j[1],
+                fixed_ip_v4=j[0],)
+        #print(interface.name)
+    
+        interfaces.append(interface)
+    
+
+
+# for data in ip_list:
+#     ab = []
+#     for j in data:
+#         ab.append(j.split('-'))
+#     print(ab)
+    
+#     break
+# ip_list_2 = [i.split('-') for i in ip_list]
+
+# print(333,ip_list_2)
+
+
+# for i in router_list:
+#     router_list = []
+#     for j in ip_list:
+#         dic = {}
+#         dic['uuid'] = i
+#         dic['fixed_ip'] = j[0]
+#         dic['name'] = j[1]
+#         router_list.append(dic)
+#     print()
+#     print(33,router_list)
+#     main_router_dict[i] = router_list
+
+# print('*****************************')
+# print('main router dict: ',main_router_dict)
+
+'''
